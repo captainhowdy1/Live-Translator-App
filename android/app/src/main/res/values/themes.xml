@@ -29,7 +29,7 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="Puente.Display">
+    <style name="Puente.Display" parent="">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/text</item>
@@ -37,7 +37,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Puente.Label">
+    <style name="Puente.Label" parent="">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">24dp</item>
@@ -49,7 +49,7 @@
         <item name="android:textColor">@color/neutral700</item>
     </style>
 
-    <style name="Puente.Step">
+    <style name="Puente.Step" parent="">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">8dp</item>
