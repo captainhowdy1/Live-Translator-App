@@ -189,7 +189,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun speak(text: String, lang: Lang, then: () -> Unit) {
         val t = tts
         if (t == null || !ttsReady) {
-            ui.postDelayed(then, 300)
+            ui.postDelayed({ then() }, 300)
             return
         }
         applyVoice(t, lang)
@@ -197,7 +197,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         ttsCallbacks[id] = then
         if (t.speak(text, TextToSpeech.QUEUE_FLUSH, null, id) != TextToSpeech.SUCCESS) {
             ttsCallbacks.remove(id)
-            ui.post(then)
+            ui.post { then() }
         }
     }
 
@@ -207,7 +207,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun applyVoice(t: TextToSpeech, lang: Lang) {
-        t.language = lang.locale
+        t.setLanguage(lang.locale)
         val wantMale = maleSwitch.isChecked
         val all: Set<Voice> = try {
             t.voices ?: emptySet()
@@ -224,7 +224,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
         val sorted = candidates.sortedByDescending { score(it, lang, wantMale) }
         val v = sorted[voiceOffset % sorted.size]
-        t.voice = v
+        t.setVoice(v)
         t.setPitch(if (wantMale && !looksMale(v)) 0.85f else 1f)
     }
 
